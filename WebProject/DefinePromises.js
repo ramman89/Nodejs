@@ -1,21 +1,26 @@
 let fs=require('fs');
 let util=require('util');
 
-let rspromise=new Promise((resolve,reject)=>
+//let rspromise=new Promise((resolve,reject)=>
+function rspromise() 
 {
-  fs.readFile('./ram.txt','utf8',(err,data)=>
+ return new Promise((resolve,reject)=>
   {
-    if(err)
-    reject(err);
-else
-resolve(data);
+    fs.readFile('./ram.txt','utf8',(err,data)=>
+    {
+      if(err)
+      reject(err);
+  else
+  resolve('hai');
+    })
   })
-})
+}
+
 
 async function main()
 {
   console.log(1);
-  await rspromise.then(x=>{console.log(x)});
+   rspromise().then(x=>{console.log(x)}).catch(e=>{console.log('err:'+e)});
   console.log(2);
   
 }
